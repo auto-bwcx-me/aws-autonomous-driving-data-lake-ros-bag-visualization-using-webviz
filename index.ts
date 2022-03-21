@@ -42,7 +42,8 @@ export class WebvizStack extends cdk.Stack {
         super(scope, id, props);
 
         const webviz_folder = 'webviz_source'
-        const webviz_dockerfile = 'Dockerfile-static-webviz'
+        // const webviz_dockerfile = 'Dockerfile-static-webviz'
+        const webviz_dockerfile = 'Dockerfile-webviz-nginx'
 
         if (!fs.existsSync(path.join(__dirname, webviz_folder, webviz_dockerfile))) {
             console.error('Dockerfile not found. Please run ./build_dependencies.sh to clone webviz locally first')
