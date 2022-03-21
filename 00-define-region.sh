@@ -26,11 +26,11 @@ if [ $find == "1" ]; then
     # specific for Mac and Linux
     uname -a | grep Darwin >/dev/null
     if [ $? -eq 0 ]; then
-        echo "config region for deploy.sh"
-        sed -i "" "s/^run_region=\"[a-z]*-[a-z]*-[1-9]*\"/run_region=\"$rg\"/" deploy.sh
+        echo "config region for cdk.json"
+        sed -i "" "s/^region: \"[a-z]*-[a-z]*-[1-9]*\"/region: \"$rg\"/" cdk.json
     else
-        echo "config region for deploy.sh"
-        sed -i "s/^run_region=\"[a-z]*-[a-z]*-[1-9]*\"/run_region=\"$rg\"/" deploy.sh
+        echo "config region for cdk.json" "region": "eu-west-1"
+        sed -i "s/^region: \"[a-z]*-[a-z]*-[1-9]*\"/region: \"$rg\"/" cdk.json
     fi
     aws configure set region $rg
 else

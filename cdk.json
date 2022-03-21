@@ -6,14 +6,14 @@
     "@aws-cdk/core:stackRelativeExports": "true",
     "@aws-cdk/aws-ecr-assets:dockerIgnoreSupport": true,
     "@aws-cdk/aws-secretsmanager:parseOwnedSecretName": true,
-    "region": "eu-west-1",
+    "region": "ap-southeast-1",
     "bucketName": "webviz-rosbag-bucket",
     "bucketExists": true,
     "generateUrlFunctionName": "generate_ros_streaming_url",
     "scenarioDB": {
       "partitionKey": "bag_file",
       "sortKey": "scene_id",
-      "region": "eu-west-1",
+      "region": "ap-southeast-1",
       "tableName": "Rosbag-Scene-Metadata"
     }
   }
