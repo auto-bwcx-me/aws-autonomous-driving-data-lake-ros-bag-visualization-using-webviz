@@ -159,6 +159,32 @@ export class WebvizStack extends cdk.Stack {
             },
             role: generateUrlLambdaRole
         });
+
+
+        // put cors
+        const putCorsLambdaRole = new iam.Role(this, 'putCorsLambdaRole', {
+            assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
+            managedPolicies: [iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole')],
+            inlinePolicies: {
+                's3-read-more': new iam.PolicyDocument({
+                    statements: [new iam.PolicyStatement({
+                        actions: ['s3:List*', 's3:Get*'],
+                        resources: ['*'],
+                        effect: iam.Effect.ALLOW
+                    })]
+                })               
+            }
+        })
+
+        this.targetBucket.grantReadWrite(putCorsLambdaRole)
+
+        const putCorsLambda = new lambda.Function(this, 'putCorsLambda', {
+            code: lambda.Code.fromAsset(path.join(__dirname, 'lambda', 'put_cors')),
+            handler: 'main.lambda_handler',
+            functionName: generateUrlFunctionName,
+            runtime: lambda.Runtime.PYTHON_3_8,
+            role: putCorsLambdaRole
+        });        
     }
 }
 
