@@ -55,7 +55,11 @@ export class WebvizStack extends cdk.Stack {
             file: webviz_dockerfile
           });
 
+
+        const ecsCluster = new ecs.Cluster(this, 'visualization-cluster');
+
         const app = new ApplicationLoadBalancedFargateService(this, 'webviz_service', {
+            ecsCluster,
             cpu: 4096,
             memoryLimitMiB: 30720,
             // memoryLimitMiB: 16386
