@@ -128,9 +128,9 @@ export class WebvizStack extends cdk.Stack {
                         effect: iam.Effect.ALLOW
                     })]
                 }),
-                's3-list': new iam.PolicyDocument({
+                's3-read-more': new iam.PolicyDocument({
                     statements: [new iam.PolicyStatement({
-                        actions: ['s3:List*'],
+                        actions: ['s3:List*', 's3:Get*'],
                         resources: ['*'],
                         effect: iam.Effect.ALLOW
                     })]
