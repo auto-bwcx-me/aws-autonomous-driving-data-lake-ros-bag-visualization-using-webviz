@@ -60,8 +60,8 @@ export class WebvizStack extends cdk.Stack {
                 image: ecs.EcrImage.fromDockerImageAsset(webvizImageAsset), // Or reference the public Docker image directly https://hub.docker.com/r/cruise/webviz
                 containerPort: 8080
             },
-            cpu: "4 vCPU",
-            memory: "16 GB",
+            cpu: 4096,
+            memoryLimitMiB: 16386,
             ephemeralStorageGiB: 200            
         })
 
