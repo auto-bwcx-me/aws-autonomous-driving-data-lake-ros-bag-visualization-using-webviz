@@ -61,8 +61,8 @@ export class WebvizStack extends cdk.Stack {
                 containerPort: 8080
             },
             cpu: 4096,
-            memoryLimitMiB: 16386,
-            ephemeralStorageGiB: 200            
+            memoryLimitMiB: 16386
+            // ephemeralStorageGiB: 200            
         })
 
         const loadbalancer = app.loadBalancer.node.defaultChild as lb.CfnLoadBalancer
