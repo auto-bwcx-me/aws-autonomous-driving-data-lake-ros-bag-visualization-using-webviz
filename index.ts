@@ -127,7 +127,14 @@ export class WebvizStack extends cdk.Stack {
                         resources: ['*'],
                         effect: iam.Effect.ALLOW
                     })]
-                })
+                }),
+                's3-list': new iam.PolicyDocument({
+                    statements: [new iam.PolicyStatement({
+                        actions: ['s3:List*'],
+                        resources: ['*'],
+                        effect: iam.Effect.ALLOW
+                    })]
+                })               
             }
         })
 
