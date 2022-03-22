@@ -19,7 +19,7 @@
 import 'source-map-support/register'
 import * as cdk from '@aws-cdk/core'
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns'
-import ecs_patterns = require('aws-cdk-lib/aws-ecs-patterns');
+import ecs_patterns from '@aws-cdk-lib/aws-ecs-patterns';
 import * as ecs from '@aws-cdk/aws-ecs'
 import * as s3 from '@aws-cdk/aws-s3'
 import * as lb from '@aws-cdk/aws-elasticloadbalancingv2'
