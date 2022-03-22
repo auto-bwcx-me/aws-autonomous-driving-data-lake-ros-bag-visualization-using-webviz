@@ -19,6 +19,7 @@
 import 'source-map-support/register'
 import * as cdk from '@aws-cdk/core'
 import { ApplicationLoadBalancedFargateService } from '@aws-cdk/aws-ecs-patterns'
+import ecs_patterns = require('aws-cdk-lib/aws-ecs-patterns');
 import * as ecs from '@aws-cdk/aws-ecs'
 import * as s3 from '@aws-cdk/aws-s3'
 import * as lb from '@aws-cdk/aws-elasticloadbalancingv2'
@@ -58,17 +59,28 @@ export class WebvizStack extends cdk.Stack {
 
         const ecsCluster = new ecs.Cluster(this, 'visualization-cluster');
 
-        const app = new ApplicationLoadBalancedFargateService(this, 'webviz_service', {
+        // Instantiate Fargate Service with cluster and image
+        new ecs_patterns.ApplicationLoadBalancedFargateService(this, "FargateService", {
             ecsCluster,
             cpu: 4096,
-            memoryLimitMiB: 30720,
-            // memoryLimitMiB: 16386
-            // ephemeralStorageGiB: 200             
+            memoryLimitMiB: 30720, 
             taskImageOptions: {
                 image: ecs.EcrImage.fromDockerImageAsset(webvizImageAsset), // Or reference the public Docker image directly https://hub.docker.com/r/cruise/webviz
                 containerPort: 8080
-            }
-        })
+            },
+        });
+
+        // const app = new ApplicationLoadBalancedFargateService(this, 'webviz_service', {
+        //     ecsCluster,
+        //     cpu: 4096,
+        //     memoryLimitMiB: 30720,
+        //     // memoryLimitMiB: 16386
+        //     // ephemeralStorageGiB: 200             
+        //     taskImageOptions: {
+        //         image: ecs.EcrImage.fromDockerImageAsset(webvizImageAsset), // Or reference the public Docker image directly https://hub.docker.com/r/cruise/webviz
+        //         containerPort: 8080
+        //     }
+        // })
 
         const loadbalancer = app.loadBalancer.node.defaultChild as lb.CfnLoadBalancer
         // explicitly set the load balancer name to something lowercase to ensure CORS settings work
