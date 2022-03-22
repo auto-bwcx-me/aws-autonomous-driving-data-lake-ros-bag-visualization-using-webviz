@@ -56,13 +56,14 @@ export class WebvizStack extends cdk.Stack {
           });
 
         const app = new ApplicationLoadBalancedFargateService(this, 'webviz_service', {
+            cpu: 4096,
+            memoryLimitMiB: 30720,
+            // memoryLimitMiB: 16386
+            // ephemeralStorageGiB: 200             
             taskImageOptions: {
                 image: ecs.EcrImage.fromDockerImageAsset(webvizImageAsset), // Or reference the public Docker image directly https://hub.docker.com/r/cruise/webviz
                 containerPort: 8080
-            },
-            cpu: 4096,
-            memoryLimitMiB: 16386
-            // ephemeralStorageGiB: 200            
+            }
         })
 
         const loadbalancer = app.loadBalancer.node.defaultChild as lb.CfnLoadBalancer
