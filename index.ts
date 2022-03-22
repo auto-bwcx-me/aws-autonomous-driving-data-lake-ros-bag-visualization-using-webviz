@@ -58,11 +58,11 @@ export class WebvizStack extends cdk.Stack {
         const app = new ApplicationLoadBalancedFargateService(this, 'webviz_service', {
             taskImageOptions: {
                 image: ecs.EcrImage.fromDockerImageAsset(webvizImageAsset), // Or reference the public Docker image directly https://hub.docker.com/r/cruise/webviz
-                containerPort: 8080,
-                cpu: "4 vCPU",
-                memory: "16 GB",
-                ephemeralStorageGiB: 200
-            }
+                containerPort: 8080
+            },
+            cpu: "4 vCPU",
+            memory: "16 GB",
+            ephemeralStorageGiB: 200            
         })
 
         const loadbalancer = app.loadBalancer.node.defaultChild as lb.CfnLoadBalancer
