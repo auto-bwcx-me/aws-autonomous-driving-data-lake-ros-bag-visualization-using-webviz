@@ -10,6 +10,7 @@
     "bucketName": "webviz-rosbag-bucket",
     "bucketExists": true,
     "generateUrlFunctionName": "generate_ros_streaming_url",
+    "putCorsFunctionName": "put_s3_bucket_cors",
     "scenarioDB": {
       "partitionKey": "bag_file",
       "sortKey": "scene_id",

@@ -71,6 +71,8 @@ export class WebvizStack extends cdk.Stack {
         const bucketExists = app.node.tryGetContext('bucketExists')
         const dbConfig = app.node.tryGetContext('scenarioDB')
         const generateUrlFunctionName = app.node.tryGetContext('generateUrlFunctionName')
+        const putCorsFunctionName = app.node.tryGetContext('putCorsFunctionName')
+        
         
         if (bucketExists) {
             this.targetBucket = s3.Bucket.fromBucketName(this, 'bucketRef', bucketName)
@@ -181,10 +183,10 @@ export class WebvizStack extends cdk.Stack {
         const putCorsLambda = new lambda.Function(this, 'putCorsLambda', {
             code: lambda.Code.fromAsset(path.join(__dirname, 'lambda', 'put_cors')),
             handler: 'main.lambda_handler',
-            functionName: generateUrlFunctionName,
+            functionName: putCorsFunctionName,
             runtime: lambda.Runtime.PYTHON_3_8,
             role: putCorsLambdaRole
-        });        
+        }); 
     }
 }
 
