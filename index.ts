@@ -170,11 +170,18 @@ export class WebvizStack extends cdk.Stack {
             inlinePolicies: {
                 's3-read-more': new iam.PolicyDocument({
                     statements: [new iam.PolicyStatement({
-                        actions: ['s3:List*', 's3:Get*'],
+                        actions: ['s3:List*', 's3:Get*',],
                         resources: ['*'],
                         effect: iam.Effect.ALLOW
                     })]
-                })               
+                }),
+                'allow-put-cors': new iam.PolicyDocument({
+                    statements: [new iam.PolicyStatement({
+                        actions: ['s3:PutBucketCORS'],
+                        resources: [this.targetBucket.bucketArn],
+                        effect: iam.Effect.ALLOW
+                    })]
+                })                               
             }
         })
 
